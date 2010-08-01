@@ -415,7 +415,9 @@ func Identifier() Parser {
 // Allows recursion by passing the parser function. Avoids infinite parser
 // construction loops.
 func Recur(p func() Parser) Parser {
-  return p()
+  return func(in Vessel) (Output, bool) {
+    return p()(in)
+  }
 }
 
 
